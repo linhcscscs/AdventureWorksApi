@@ -65,7 +65,6 @@ namespace AdventureWorks.Infrastructure.CacheProvider.BaseCache
                string key,
                double cacheTime = CachingTime.CACHING_TIME_DEFAULT_IN_5_MINUTES,
                bool isDeepClone = true)
-               where T : class
         {
             T? result = default;
             if (!IsSet(key))
@@ -88,7 +87,7 @@ namespace AdventureWorks.Infrastructure.CacheProvider.BaseCache
             return isDeepClone && result != null ? result.DeepClone() : result;
         }
 
-        public virtual async Task<T?> GetOrSet<T>(Func<Task<T?>> getDataSource, string key, double cacheTime = 1, bool isDeepClone = true) where T : class
+        public virtual async Task<T?> GetOrSet<T>(Func<Task<T?>> getDataSource, string key, double cacheTime = 1, bool isDeepClone = true)
         {
             T? result = default;
             if (!IsSet(key))

@@ -17,13 +17,12 @@ namespace AdventureWorks.Infrastructure.CacheProvider.BaseCache.Interface
         public T? GetOrSet<T>(Func<T?> getDataSource,
            string key,
            double cacheTime = CachingTime.CACHING_TIME_DEFAULT_IN_1_MINUTES,
-           bool isDeepClone = true)
-           where T : class;
-        public Task<T?> GetOrSet<T>(Func<Task<T?>> getDataSource, 
-            string key, 
+           bool isDeepClone = true);
+
+        public Task<T?> GetOrSet<T>(Func<Task<T?>> getDataSource,
+            string key,
             double cacheTime = 1,
-            bool isDeepClone = true) 
-            where T : class;
+            bool isDeepClone = true);
 
         void Remove(string cacheKey);
         void Remove(List<string> cacheKeys);
