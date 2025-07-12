@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DeepCloner" Version="0.10.4" />
+    <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>

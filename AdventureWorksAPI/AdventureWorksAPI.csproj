@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DeepCloner" Version="0.10.4" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.7" />
+    <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureWorks.Domain\AdventureWorks.Domain.csproj" />
+    <ProjectReference Include="..\AdventureWorks.Infrastructure\AdventureWorks.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

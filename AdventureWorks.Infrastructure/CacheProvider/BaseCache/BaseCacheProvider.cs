@@ -1,6 +1,7 @@
 ﻿using AdventureWorks.Infrastructure.CacheProvider.BaseCache.Interface;
 using Force.DeepCloner;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AdventureWorks.Infrastructure.CacheProvider.BaseCache
 {
@@ -70,6 +71,29 @@ namespace AdventureWorks.Infrastructure.CacheProvider.BaseCache
             if (!IsSet(key))
             {
                 result = getDataSource.Invoke();
+                Set(key, result, cacheTime);
+            }
+            else
+            {
+                try
+                {
+                    result = Get<T>(key);
+                }
+                catch
+                {
+                    Invalidate(key);
+                }
+            }
+
+            return isDeepClone && result != null ? result.DeepClone() : result;
+        }
+
+        public virtual async Task<T?> GetOrSet<T>(Func<Task<T?>> getDataSource, string key, double cacheTime = 1, bool isDeepClone = true) where T : class
+        {
+            T? result = default;
+            if (!IsSet(key))
+            {
+                result = await getDataSource.Invoke();
                 Set(key, result, cacheTime);
             }
             else

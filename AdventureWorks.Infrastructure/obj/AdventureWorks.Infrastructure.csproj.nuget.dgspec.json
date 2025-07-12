@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\linhl\\Desktop\\Projects\\AdventureWorksAPI\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj": {}
+    "D:\\AdventureWorksApi\\AdventureWorksApi\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\linhl\\Desktop\\Projects\\AdventureWorksAPI\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj": {
+    "D:\\AdventureWorksApi\\AdventureWorksApi\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\linhl\\Desktop\\Projects\\AdventureWorksAPI\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj",
+        "projectUniqueName": "D:\\AdventureWorksApi\\AdventureWorksApi\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj",
         "projectName": "AdventureWorks.Infrastructure",
-        "projectPath": "C:\\Users\\linhl\\Desktop\\Projects\\AdventureWorksAPI\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\linhl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\linhl\\Desktop\\Projects\\AdventureWorksAPI\\AdventureWorks.Infrastructure\\obj\\",
+        "projectPath": "D:\\AdventureWorksApi\\AdventureWorksApi\\AdventureWorks.Infrastructure\\AdventureWorks.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\AdventureWorksApi\\AdventureWorksApi\\AdventureWorks.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\linhl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -60,7 +60,7 @@
             },
             "System.Runtime.Caching": {
               "target": "Package",
-              "version": "[9.0.7, )"
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

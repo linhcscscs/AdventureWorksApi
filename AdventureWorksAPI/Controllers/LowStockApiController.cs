@@ -28,23 +28,21 @@ public class LowStockApiController : ControllerBase
                                   select new
                                   {
                                       ProductID = g.Key,
-                                      AvgSoldLast3Months = g.Sum(x => x.OrderQty) / 3
+                                      AvgSoldLastThreeMonths = g.Sum(x => x.OrderQty) / 3
                                   };
 
             // Alert Data
             var alertData = await (from p in _context.Products
                                    join pi in _context.ProductInventories on p.ProductID equals pi.ProductID
                                    join avp in avgSoldProducts on p.ProductID equals avp.ProductID
-                                   let stock = pi.Quantity
-                                   let avgSold = avp.AvgSoldLast3Months
-                                   where stock < 2 * avgSold
+                                   where pi.Quantity < 2 * avp.AvgSoldLastThreeMonths
                                    select new LowStockDto
                                    {
                                        ProductID = p.ProductID,
                                        ProductName = p.Name,
-                                       StockQtty = stock,
-                                       AvgSoldLast3Months = Math.Round((decimal)avgSold, 2),
-                                       ExpectedShortage = Math.Round(2 * (decimal)avgSold - stock, 2)
+                                       StockQtty = pi.Quantity,
+                                       AvgSoldLastThreeMonths = Math.Round((decimal)avp.AvgSoldLastThreeMonths, 2),
+                                       ExpectedShortage = Math.Round(2 * (decimal)avp.AvgSoldLastThreeMonths - pi.Quantity, 2)
                                    }).ToListAsync();
 
             if (alertData == null || !alertData.Any())
