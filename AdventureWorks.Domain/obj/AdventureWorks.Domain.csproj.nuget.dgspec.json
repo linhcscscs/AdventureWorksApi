@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[0.10.4, )"
             },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
             "System.Runtime.Caching": {
               "target": "Package",
               "version": "[6.0.0, )"

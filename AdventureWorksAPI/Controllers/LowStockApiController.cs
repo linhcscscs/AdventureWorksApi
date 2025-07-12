@@ -18,12 +18,12 @@ public class LowStockApiController : ControllerBase
     #endregion
     #region API
     [HttpGet]
-    public async Task<IActionResult> GetLowStockAlert()
+    public async Task<IActionResult> GetLowStockAlert(DateTime date)
     {
         try
         {
-            DateTime threeMonthsAgo = DateTime.Now.AddMonths(-3);
-            // AVG Sold Product
+            DateTime threeMonthsAgo = date.AddMonths(-3);
+
             var avgSoldProducts = from sod in _context.SalesOrderDetails
                                   join soh in _context.SalesOrderHeaders on sod.SalesOrderID equals soh.SalesOrderID
                                   where soh.OrderDate >= threeMonthsAgo
@@ -31,10 +31,9 @@ public class LowStockApiController : ControllerBase
                                   select new
                                   {
                                       ProductID = g.Key,
-                                      AvgSoldLastThreeMonths = g.Sum(x => x.OrderQty) / 3
+                                      AvgSoldLastThreeMonths = (decimal)g.Sum(x => x.OrderQty) / 3
                                   };
 
-            // Alert Data
             var alertData = await (from p in _context.Products
                                    join pi in _context.ProductInventories on p.ProductID equals pi.ProductID
                                    join avp in avgSoldProducts on p.ProductID equals avp.ProductID
@@ -44,8 +43,8 @@ public class LowStockApiController : ControllerBase
                                        ProductID = p.ProductID,
                                        ProductName = p.Name,
                                        StockQtty = pi.Quantity,
-                                       AvgSoldLastThreeMonths = Math.Round((decimal)avp.AvgSoldLastThreeMonths, 2),
-                                       ExpectedShortage = Math.Round(2 * (decimal)avp.AvgSoldLastThreeMonths - pi.Quantity, 2)
+                                       AvgSoldLastThreeMonths = Math.Round(avp.AvgSoldLastThreeMonths, 0),
+                                       ExpectedShortage = Math.Round(2 * avp.AvgSoldLastThreeMonths - pi.Quantity, 0)
                                    }).ToListAsync();
 
             if (alertData == null || !alertData.Any())

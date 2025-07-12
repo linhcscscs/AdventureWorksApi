@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdventureWorks.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b92f3766315ae84e8bfb92d4c44eef756ef6301f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6e9635440a453d094d088eb3be942ed2a0abb8b")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdventureWorks.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdventureWorks.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

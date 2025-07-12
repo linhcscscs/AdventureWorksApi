@@ -5,100 +5,84 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static AdventureWorks.Domain.DTO.MonthlyReportDto;
 
-namespace AdventureWorksAPI.Controllers;
-
 [ApiController]
 [Route("[controller]")]
 public class MonthlyReportApiController : ControllerBase
 {
-    #region Props
     private readonly AdventureWorks2022Context _context;
     private readonly ICacheProvider _cache;
     private const int NUMBER_OF_TOP_SALE_PRODUCTS = 5;
+
     public MonthlyReportApiController(AdventureWorks2022Context context, ICacheProvider cache)
     {
         _context = context;
         _cache = cache;
     }
-    #endregion
-    #region API
+
     [HttpGet]
-    public async Task<IActionResult> GetMonthlyReport()
+    public async Task<IActionResult> GetMonthlyReport(int month, int year)
     {
-        var today = DateTime.Today;
-        var startOfThisMonth = new DateTime(today.Year, today.Month, 1);
+        var startOfThisMonth = new DateTime(year, month, 1);
         var endOfThisMonth = startOfThisMonth.AddMonths(1).AddDays(-1);
         var startOfLastMonth = startOfThisMonth.AddMonths(-1);
         var endOfLastMonth = startOfThisMonth.AddDays(-1);
+
         try
         {
             var data = await _cache.GetOrSet(
-                getDataSource: async () =>
+                async () =>
                 {
                     var thisMonthData = GetMonthlyData(startOfThisMonth, endOfThisMonth);
                     var lastMonthData = GetMonthlyData(startOfLastMonth, endOfLastMonth);
-                    var topSaleProducts = (from soh in _context.SalesOrderHeaders
-                                           join sod in _context.SalesOrderDetails on soh.SalesOrderID equals sod.SalesOrderID
-                                           join p in _context.Products on sod.ProductID equals p.ProductID
-                                           where soh.OrderDate >= startOfThisMonth && soh.OrderDate <= endOfThisMonth
-                                           group sod by new { p.ProductID, p.Name } into g
-                                           select new
-                                           {
-                                               ProductID = g.Key.ProductID,
-                                               ProductName = g.Key.Name,
-                                               Qty = g.Sum(x => x.OrderQty)
-                                           })
-                             .OrderByDescending(x => x.Qty)
-                             .Take(NUMBER_OF_TOP_SALE_PRODUCTS)
-                             .Select(x => new ProductReport
-                             {
-                                 ProductID = x.ProductID,
-                                 ProductName = x.ProductName
-                             })
-                             .ToListAsync();
-                    await Task.WhenAll(thisMonthData, lastMonthData, topSaleProducts);
+
+                    var topSaleProducts = await (from soh in _context.SalesOrderHeaders
+                                               join sod in _context.SalesOrderDetails on soh.SalesOrderID equals sod.SalesOrderID
+                                               join p in _context.Products on sod.ProductID equals p.ProductID
+                                               where soh.OrderDate >= startOfThisMonth && soh.OrderDate <= endOfThisMonth
+                                               group sod by new { p.ProductID, p.Name } into g
+                                               orderby g.Sum(x => x.OrderQty) descending
+                                               select new ProductReport
+                                               {
+                                                   ProductID = g.Key.ProductID,
+                                                   ProductName = g.Key.Name
+                                               })
+                                             .Take(NUMBER_OF_TOP_SALE_PRODUCTS)
+                                             .ToListAsync();
+
                     return new MonthlyReportDto
                     {
-                        Month = today.Month,
-                        Year = today.Year,
-                        TotalOrders = thisMonthData.Result.totalOrder,
-                        TotalAmount = thisMonthData.Result.totalAmount,
-                        TopSaleProduct = topSaleProducts.Result,
+                        Month = month,
+                        Year = year,
+                        TotalOrders = thisMonthData.totalOrder,
+                        TotalAmount = thisMonthData.totalAmount,
+                        TopSaleProduct = topSaleProducts,
                         GrowthRate = new GrowthRateReport
                         {
-                            GrowthRateOrders = lastMonthData.Result.totalOrder == 0 ? null :
-                                Math.Round((double)(thisMonthData.Result.totalOrder - lastMonthData.Result.totalOrder) / lastMonthData.Result.totalOrder * 100, 2),
-                            GrowthRateAmount = lastMonthData.Result.totalAmount == 0 ? null :
-                                Math.Round((double)((thisMonthData.Result.totalAmount - lastMonthData.Result.totalAmount) / lastMonthData.Result.totalAmount * 100), 2)
+                            GrowthRateOrders = lastMonthData.totalOrder == 0 ? null :
+                                Math.Round((double)(thisMonthData.totalOrder - lastMonthData.totalOrder) / lastMonthData.totalOrder * 100, 2),
+                            GrowthRateAmount = lastMonthData.totalAmount == 0 ? null :
+                                Math.Round((double)((thisMonthData.totalAmount - lastMonthData.totalAmount) / lastMonthData.totalAmount * 100), 2)
                         }
                     };
                 },
-                key: $"MonthlyReport-{today.Year}-{today.Month}"
-                );
+                key: $"MonthlyReport:{year}:{month}"
+            );
 
-            if (data == null)
-                return NoContent();
-
-            return Ok(data);
+            return data == null ? NoContent() : Ok(data);
         }
         catch (Exception ex)
         {
-            return StatusCode(500);
+            return StatusCode(500, "Internal server error");
         }
     }
-    #endregion
-    #region Methods
-    private async Task<(int totalOrder, decimal totalAmount)> GetMonthlyData(DateTime startDate, DateTime endDate)
+
+    private (int totalOrder, decimal totalAmount) GetMonthlyData(DateTime startDate, DateTime endDate)
     {
         var thisMonthData = _context.SalesOrderHeaders
                                     .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate);
 
-        var countTask = thisMonthData.CountAsync();
-        var sumTask = thisMonthData.SumAsync(x => x.TotalDue);
-
-        await Task.WhenAll(countTask, sumTask);
-
-        return (countTask.Result, sumTask.Result);
+        var countTask = thisMonthData.Count();
+        var sumTask = thisMonthData.Sum(x => x.TotalDue);
+        return (countTask, sumTask);
     }
-    #endregion
 }

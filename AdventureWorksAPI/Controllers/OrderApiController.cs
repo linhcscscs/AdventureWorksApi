@@ -32,7 +32,7 @@ public class OrderApiController : ControllerBase
     }
 
     // GET api/orders/customer/5
-    [HttpGet("customer/{customerId}")]
+    [HttpGet("api/[controller]/[action]/{customerId}")]
     public async Task<IActionResult> GetOrdersByCustomer(int customerId)
     {
         try
@@ -50,7 +50,7 @@ public class OrderApiController : ControllerBase
     }
 
     // PUT api/orders/10/status
-    [HttpPut("{orderId}/status")]
+    [HttpPut("api/[controller]/[action]/{orderId}")]
     public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] OrderStatus status)
     {
         try
