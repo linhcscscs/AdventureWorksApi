@@ -54,7 +54,7 @@ public class LowStockApiController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500);
+            return StatusCode(500, "Internal server error");
         }
     }
     #endregion
