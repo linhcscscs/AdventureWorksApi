@@ -9,11 +9,14 @@ namespace AdventureWorksAPI.Controllers;
 [Route("[controller]")]
 public class LowStockApiController : ControllerBase
 {
+    #region Props
     private readonly AdventureWorks2022Context _context;
     public LowStockApiController(AdventureWorks2022Context context)
     {
         _context = context;
     }
+    #endregion
+    #region API
     [HttpGet]
     public async Task<IActionResult> GetLowStockAlert()
     {
@@ -55,4 +58,5 @@ public class LowStockApiController : ControllerBase
             return StatusCode(500);
         }
     }
+    #endregion
 }

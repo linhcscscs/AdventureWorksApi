@@ -11,6 +11,7 @@ namespace AdventureWorksAPI.Controllers;
 [Route("[controller]")]
 public class MonthlyReportApiController : ControllerBase
 {
+    #region Props
     private readonly AdventureWorks2022Context _context;
     private readonly ICacheProvider _cache;
     private const int NUMBER_OF_TOP_SALE_PRODUCTS = 5;
@@ -19,6 +20,8 @@ public class MonthlyReportApiController : ControllerBase
         _context = context;
         _cache = cache;
     }
+    #endregion
+    #region API
     [HttpGet]
     public async Task<IActionResult> GetMonthlyReport()
     {
@@ -29,7 +32,7 @@ public class MonthlyReportApiController : ControllerBase
         var endOfLastMonth = startOfThisMonth.AddDays(-1);
         try
         {
-            var data = _cache.GetOrSet(
+            var data = await _cache.GetOrSet(
                 getDataSource: async () =>
                 {
                     var thisMonthData = GetMonthlyData(startOfThisMonth, endOfThisMonth);
@@ -83,7 +86,8 @@ public class MonthlyReportApiController : ControllerBase
             return StatusCode(500);
         }
     }
-
+    #endregion
+    #region Methods
     private async Task<(int totalOrder, decimal totalAmount)> GetMonthlyData(DateTime startDate, DateTime endDate)
     {
         var thisMonthData = _context.SalesOrderHeaders
@@ -96,4 +100,5 @@ public class MonthlyReportApiController : ControllerBase
 
         return (countTask.Result, sumTask.Result);
     }
+    #endregion
 }

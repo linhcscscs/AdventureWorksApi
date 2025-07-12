@@ -1,3 +1,10 @@
+﻿using AdventureWorks.Application.Interface;
+using AdventureWorks.Application.Services;
+using AdventureWorks.Infrastructure.CacheProvider.BaseCache.Interface;
+using AdventureWorks.Infrastructure.CacheProvider.MemCache;
+using AdventureWorks.Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+#region Caching 
+builder.Services.AddSingleton<ICacheProvider, MemCacheProvider>();
+#endregion
+#region Database Context
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AdventureWorks2022Context>(options =>
+    options.UseSqlServer(connectionString));
+#endregion
+#region Application Services
+builder.Services.AddScoped<IOrderService, OrderService>();
+#endregion
 
 var app = builder.Build();
 

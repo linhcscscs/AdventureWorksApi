@@ -1,0 +1,13 @@
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\bin\Debug\net9.0\AdventureWorks.Infrastructure.deps.json
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\bin\Debug\net9.0\AdventureWorks.Infrastructure.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\bin\Debug\net9.0\AdventureWorks.Infrastructure.pdb
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.csproj.AssemblyReference.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.AssemblyInfoInputs.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.AssemblyInfo.cs
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.csproj.CoreCompileInputs.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.sourcelink.json
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\refint\AdventureWorks.Infrastructure.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\AdventureWorks.Infrastructure.pdb
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Infrastructure\obj\Debug\net9.0\ref\AdventureWorks.Infrastructure.dll

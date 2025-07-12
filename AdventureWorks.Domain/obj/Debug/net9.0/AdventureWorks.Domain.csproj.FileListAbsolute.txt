@@ -1,0 +1,13 @@
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\bin\Debug\net9.0\AdventureWorks.Domain.deps.json
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\bin\Debug\net9.0\AdventureWorks.Domain.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\bin\Debug\net9.0\AdventureWorks.Domain.pdb
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.csproj.AssemblyReference.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.AssemblyInfoInputs.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.AssemblyInfo.cs
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.csproj.CoreCompileInputs.cache
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.sourcelink.json
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\refint\AdventureWorks.Domain.dll
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\AdventureWorks.Domain.pdb
+D:\AdventureWorksApi\AdventureWorksApi\AdventureWorks.Domain\obj\Debug\net9.0\ref\AdventureWorks.Domain.dll

@@ -11,4 +11,9 @@
     <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureWorks.Domain\AdventureWorks.Domain.csproj" />
+    <ProjectReference Include="..\AdventureWorks.Infrastructure\AdventureWorks.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
